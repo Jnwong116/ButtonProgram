@@ -1,0 +1,95 @@
+body {
+  font: 16px/1.5 "Lato", sans-serif;
+}
+
+.dropdown {
+  background-color: #04aa6d;
+  color: white;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+}
+
+.dropdownContent {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdownContent a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdownContent a:hover {
+  background-color: #ddd;
+}
+
+.placeButton:hover .dropdownContent {
+  display: block;
+}
+
+.placeButton {
+  position: relative;
+  display: inline-block;
+}
+
+.placeButton:hover .dropdown {
+  background-color: #3e8e41;
+}
+
+.pageHeader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 200px;
+  background-color: #3395c7;
+}
+
+.menuHeader {
+  text-transform: uppercase;
+  letter-spacing: 0.15rem;
+  font-size: 12px;
+  margin-top: 12px;
+  color: white;
+}
+
+.pageHeader nav {
+  display: flex;
+  flex-direction: column;
+  min-height: 100%;
+}
+
+.pageHeader .menu {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
+.pageHeader .menu li {
+  width: 100%;
+  padding: 12px 15px;
+}
+
+.pageHeader .menu button {
+  font: inherit;
+  color: inherit;
+  font-size: inherit;
+  cursor: pointer;
+  border: none;
+}
+
+.pageContent {
+  position: relative;
+  left: 200px;
+  width: calc(100% - 200px);
+  min-height: 100vh;
+  padding: 30px;
+}
