@@ -52,11 +52,11 @@ function addValue() {
   const valueText = document.getElementById("addValue").value;
   value.innerHTML = valueText;
   value.classList.add("dropdownValue");
-  value.onclick = () => {
-    updateButtonText(dropdown, value.innerHTML);
-  };
 
   for (let i = 0; i < dropdowns.length; i++) {
     dropdowns[i].appendChild(value);
+    value.onclick = () => {
+      updateButtonText(dropdowns[i], value.innerHTML);
+    };
   }
 }
