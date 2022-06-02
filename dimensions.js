@@ -1,3 +1,5 @@
+const dropdownValues = ["Value 1", "Value 2", "Value 3"];
+
 function updateButtonText(button, text) {
   button.innerHTML = text;
 }
@@ -14,30 +16,7 @@ function addButton() {
   const dropdownContent = document.createElement("div");
   dropdownContent.classList.add("dropdownContent");
 
-  const value1 = document.createElement("a");
-  value1.innerHTML = "Value 1";
-  value1.classList.add("dropdownValue");
-  value1.onclick = () => {
-    updateButtonText(dropdown, value1.innerHTML);
-  };
-
-  const value2 = document.createElement("a");
-  value2.innerHTML = "Value 2";
-  value2.classList.add("dropdownValue");
-  value2.onclick = () => {
-    updateButtonText(dropdown, value2.innerHTML);
-  };
-
-  const value3 = document.createElement("a");
-  value3.innerHTML = "Value 3";
-  value3.classList.add("dropdownValue");
-  value3.onclick = () => {
-    updateButtonText(dropdown, value3.innerHTML);
-  };
-
-  dropdownContent.appendChild(value1);
-  dropdownContent.appendChild(value2);
-  dropdownContent.appendChild(value3);
+  populateDropdown(dropdownContent, dropdown);
 
   button.appendChild(dropdown);
   button.appendChild(dropdownContent);
@@ -46,17 +25,33 @@ function addButton() {
 }
 
 function addValue() {
-  const dropdowns = document.getElementsByClassName("dropdownContent");
+  const dropdowns = document.getElementsByClassName("dropdown");
+  const dropdownContent = document.getElementsByClassName("dropdownContent");
 
-  const value = document.createElement("a");
-  const valueText = document.getElementById("addValue").value;
-  value.innerHTML = valueText;
-  value.classList.add("dropdownValue");
+  const newVal = document.getElementById("addValue").value;
+
+  dropdownValues.push(newVal);
 
   for (let i = 0; i < dropdowns.length; i++) {
-    dropdowns[i].appendChild(value);
+    populateDropdown(dropdownContent[i], dropdowns[i]);
+  }
+}
+
+function populateDropdown(dropdownContent, dropdown) {
+  clearDropdowns(dropdownContent);
+  for (let i = 0; i < dropdownValues.length; i++) {
+    const value = document.createElement("a");
+    value.innerHTML = dropdownValues[i];
+    value.classList.add("dropdownValue");
     value.onclick = () => {
-      updateButtonText(dropdowns[i], value.innerHTML);
+      updateButtonText(dropdown, value.innerHTML);
     };
+    dropdownContent.appendChild(value);
+  }
+}
+
+function clearDropdowns(dropdownContent) {
+  while (dropdownContent.firstChild) {
+    dropdownContent.removeChild(dropdownContent.firstChild);
   }
 }

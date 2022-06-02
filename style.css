@@ -73,7 +73,7 @@ body {
   flex-grow: 1;
 }
 
-.pageHeader .menu li {
+.pageHeader .menu p {
   width: 100%;
   padding: 12px 15px;
 }
@@ -92,4 +92,21 @@ body {
   width: calc(100% - 200px);
   min-height: 100vh;
   padding: 30px;
+}
+
+input {
+  -webkit-appearance: none;
+  border: none;
+}
+
+.menu input {
+  width: 70%;
+  padding: 12px 15px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin-bottom: 12px;
+}
+
+.menuForm {
+  margin-top: 0;
 }
