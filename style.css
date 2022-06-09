@@ -8,6 +8,8 @@ body {
   padding: 16px;
   font-size: 16px;
   border: none;
+  cursor: move;
+  z-index: 10;
 }
 
 .dropdownContent {
@@ -17,6 +19,8 @@ body {
   min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
+  max-height: 200px;
+  overflow-y: scroll;
 }
 
 .dropdownContent a {
@@ -35,8 +39,9 @@ body {
 }
 
 .placeButton {
-  position: relative;
+  position: absolute;
   display: inline-block;
+  z-index: 9;
 }
 
 .placeButton:hover .dropdown {
