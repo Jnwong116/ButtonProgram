@@ -58,6 +58,8 @@ const dropdownValues = [
   "Penthouse 5",
 ];
 
+let selectedDropdown = null;
+
 function updateButtonText(button, text) {
   button.innerHTML = text;
 }
@@ -128,6 +130,27 @@ function clearDropdowns(dropdownContent) {
   }
 }
 
+function calculateDimensions() {
+  const left = document.getElementById("left");
+  const top = document.getElementById("top");
+  const width = document.getElementById("width");
+  const height = document.getElementById("height");
+  const dimensions = selectedDropdown.getBoundingClientRect();
+  left.value = selectedDropdown.offsetLeft;
+  top.value = selectedDropdown.offsetTop;
+  width.value = dimensions.width;
+  height.value = dimensions.height;
+}
+
+function calcButtonNodes() {
+  const buttons = document.getElementsByClassName("placeButton");
+  const buttonNodes = [];
+  for (let i = 0; i < buttons.length; i++) {
+    buttonNodes.push(buttons[i].getBoundingClientRect());
+  }
+  return buttonNodes;
+}
+
 function drag(button) {
   let pos1 = 0,
     pos2 = 0,
@@ -158,5 +181,7 @@ function drag(button) {
   function closeDragElement() {
     document.onmouseup = null;
     document.onmousemove = null;
+    selectedDropdown = button;
+    calculateDimensions();
   }
 }
