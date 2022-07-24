@@ -76,12 +76,19 @@ function addButton() {
   const dropdownContent = document.createElement("div");
   dropdownContent.classList.add("dropdownContent");
 
+  const buttonNumber = document.createElement("div");
+  buttonNumber.classList.add("buttonNumber");
+  buttonNumber.innerHTML = "1";
+
   populateDropdown(dropdownContent, dropdown);
 
+  button.appendChild(buttonNumber);
   button.appendChild(dropdown);
   button.appendChild(dropdownContent);
 
   content.appendChild(button);
+
+  calcButtonNodes();
 
   drag(button);
 }
@@ -146,9 +153,35 @@ function calcButtonNodes() {
   const buttons = document.getElementsByClassName("placeButton");
   const buttonNodes = [];
   for (let i = 0; i < buttons.length; i++) {
-    buttonNodes.push(buttons[i].getBoundingClientRect());
+    const buttonDimensions = buttons[i].getBoundingClientRect();
+    buttonNodes.push({
+      index: i,
+      top: buttonDimensions.top,
+      right: buttonDimensions.right,
+    });
   }
-  return buttonNodes;
+
+  buttonNodes.sort((a, b) => {
+    if (a.top - b.top < 0) {
+      return -1;
+    } else if (a.top - b.top > 0) {
+      return 1;
+    } else {
+      if (a.right - b.right < 0) {
+        return 1;
+      } else if (a.right - b.right > 0) {
+        return -1;
+      } else {
+        return 0;
+      }
+    }
+  });
+
+  for (let i = 0; i < buttonNodes.length; i++) {
+    const button = buttonNodes[i];
+    const buttonContainer = buttons[button.index];
+    buttonContainer.childNodes[0].innerHTML = "Button " + (i + 1);
+  }
 }
 
 function drag(button) {
@@ -183,5 +216,6 @@ function drag(button) {
     document.onmousemove = null;
     selectedDropdown = button;
     calculateDimensions();
+    calcButtonNodes();
   }
 }
