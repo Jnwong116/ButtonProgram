@@ -48,6 +48,10 @@ body {
   background-color: #3e8e41;
 }
 
+.selected .dropdown {
+  background-color: #dfe21b;
+}
+
 .pageHeader {
   position: fixed;
   top: 0;

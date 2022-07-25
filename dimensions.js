@@ -76,19 +76,12 @@ function addButton() {
   const dropdownContent = document.createElement("div");
   dropdownContent.classList.add("dropdownContent");
 
-  const buttonNumber = document.createElement("div");
-  buttonNumber.classList.add("buttonNumber");
-  buttonNumber.innerHTML = "1";
-
   populateDropdown(dropdownContent, dropdown);
 
-  button.appendChild(buttonNumber);
   button.appendChild(dropdown);
   button.appendChild(dropdownContent);
 
   content.appendChild(button);
-
-  calcButtonNodes();
 
   drag(button);
 }
@@ -149,41 +142,6 @@ function calculateDimensions() {
   height.value = dimensions.height;
 }
 
-function calcButtonNodes() {
-  const buttons = document.getElementsByClassName("placeButton");
-  const buttonNodes = [];
-  for (let i = 0; i < buttons.length; i++) {
-    const buttonDimensions = buttons[i].getBoundingClientRect();
-    buttonNodes.push({
-      index: i,
-      top: buttonDimensions.top,
-      right: buttonDimensions.right,
-    });
-  }
-
-  buttonNodes.sort((a, b) => {
-    if (a.top - b.top < 0) {
-      return -1;
-    } else if (a.top - b.top > 0) {
-      return 1;
-    } else {
-      if (a.right - b.right < 0) {
-        return 1;
-      } else if (a.right - b.right > 0) {
-        return -1;
-      } else {
-        return 0;
-      }
-    }
-  });
-
-  for (let i = 0; i < buttonNodes.length; i++) {
-    const button = buttonNodes[i];
-    const buttonContainer = buttons[button.index];
-    buttonContainer.childNodes[0].innerHTML = "Button " + (i + 1);
-  }
-}
-
 function drag(button) {
   let pos1 = 0,
     pos2 = 0,
@@ -209,13 +167,14 @@ function drag(button) {
     pos4 = e.clientY;
     button.style.top = button.offsetTop - pos2 + "px";
     button.style.left = button.offsetLeft - pos1 + "px";
+    selectedDropdown.classList.remove("selected");
   }
 
   function closeDragElement() {
     document.onmouseup = null;
     document.onmousemove = null;
     selectedDropdown = button;
+    selectedDropdown.classList.add("selected");
     calculateDimensions();
-    calcButtonNodes();
   }
 }
