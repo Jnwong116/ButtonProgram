@@ -1,15 +1,18 @@
+:root {
+  --menuWidth: 420px;
+}
+
 body {
   font: 16px/1.5 "Lato", sans-serif;
 }
 
 .dropdown {
-  background-color: #04aa6d;
-  color: white;
-  padding: 16px;
+  padding: 24px;
   font-size: 16px;
   border: none;
   cursor: move;
   z-index: 10;
+  text-align: center;
 }
 
 .dropdownContent {
@@ -34,22 +37,23 @@ body {
   background-color: #ddd;
 }
 
-.placeButton:hover .dropdownContent {
+.dropdownContainer:hover .dropdownContent {
   display: block;
 }
 
-.placeButton {
-  position: absolute;
+.dropdownContainer {
   display: inline-block;
   z-index: 9;
+  width: 50%;
+  flex: 0 0 auto;
 }
 
-.placeButton:hover .dropdown {
-  background-color: #3e8e41;
+.dropdownContainer:hover .dropdown {
+  background-color: gray;
 }
 
-.selected .dropdown {
-  background-color: #dfe21b;
+.selected {
+  background-color: #dfe21b !important;
 }
 
 .pageHeader {
@@ -58,7 +62,7 @@ body {
   left: 0;
   right: 0;
   bottom: 0;
-  width: 200px;
+  width: var(--menuWidth);
   background-color: #3395c7;
 }
 
@@ -66,25 +70,27 @@ body {
   text-transform: uppercase;
   letter-spacing: 0.15rem;
   font-size: 12px;
-  margin-top: 12px;
   color: white;
+  flex-basis: 50%;
+  margin-bottom: 0px;
+  height: 25px;
 }
 
 .pageHeader nav {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   min-height: 100%;
 }
 
 .pageHeader .menu {
   display: flex;
-  flex-direction: column;
-  flex-grow: 1;
+  flex-wrap: wrap;
+  padding-bottom: 10px;
 }
 
 .pageHeader .menu p {
   width: 100%;
-  padding: 12px 15px;
+  height: fit-content;
 }
 
 .pageHeader .menu button {
@@ -97,10 +103,9 @@ body {
 
 .pageContent {
   position: relative;
-  left: 200px;
-  width: calc(100% - 260px);
+  left: var(--menuWidth);
+  width: calc(100% - var(--menuWidth));
   min-height: 100vh;
-  padding: 30px;
   background-color: #e6dcee;
 }
 
@@ -110,13 +115,35 @@ input {
 }
 
 .menu input {
-  width: 70%;
-  padding: 12px 15px;
+  width: 40%;
+  flex-basis: 44%;
   border: 1px solid #ccc;
   border-radius: 4px;
-  margin-bottom: 12px;
+  height: 26px;
+  margin-left: 15px;
 }
 
 .menuForm {
   margin-top: 0;
+}
+
+.menu button {
+  height: 26px;
+}
+
+.addValue {
+  margin-left: 15px;
+}
+
+.placeButton {
+  background-color: #04aa6d;
+  color: black;
+  padding: 16px;
+  font-size: 16px;
+  border: none;
+  cursor: move;
+  z-index: 10;
+  width: 30px;
+  position: absolute;
+  white-space: nowrap;
 }

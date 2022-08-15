@@ -58,36 +58,34 @@ const dropdownValues = [
   "Penthouse 5",
 ];
 
+const relayValues = [];
+
 let selectedDropdown = null;
 
-function updateButtonText(button, text) {
-  button.innerHTML = text;
+function updateButtonText(text) {
+  selectedDropdown.innerHTML = text;
+}
+
+function updateRelayText(text) {
+  const relay = document.getElementById("relay");
+  relay.innerHTML = text;
 }
 
 function addButton() {
   const content = document.getElementById("pageContent");
   const button = document.createElement("div");
   button.classList.add("placeButton");
-
-  const dropdown = document.createElement("button");
-  dropdown.classList.add("dropdown");
-  dropdown.innerHTML = "Dropdown";
-
-  const dropdownContent = document.createElement("div");
-  dropdownContent.classList.add("dropdownContent");
-
-  populateDropdown(dropdownContent, dropdown);
-
-  button.appendChild(dropdown);
-  button.appendChild(dropdownContent);
+  button.innerHTML = "Placeholder";
 
   content.appendChild(button);
+
+  // Adds number to relay values
+  relayValues.push(relayValues.length + 1);
 
   drag(button);
 }
 
 function addValue() {
-  const dropdowns = document.getElementsByClassName("dropdown");
   const dropdownContent = document.getElementsByClassName("dropdownContent");
 
   const newVal = document.getElementById("addValue").value;
@@ -106,19 +104,17 @@ function addValue() {
 
   dropdownValues.push(newVal);
 
-  for (let i = 0; i < dropdowns.length; i++) {
-    populateDropdown(dropdownContent[i], dropdowns[i]);
-  }
+  populateDropdown(dropdownContent[i], dropdownValues, updateButtonText);
 }
 
-function populateDropdown(dropdownContent, dropdown) {
+function populateDropdown(dropdownContent, dropdownArray, onClick) {
   clearDropdowns(dropdownContent);
-  for (let i = 0; i < dropdownValues.length; i++) {
+  for (let i = 0; i < dropdownArray.length; i++) {
     const value = document.createElement("a");
-    value.innerHTML = dropdownValues[i];
+    value.innerHTML = dropdownArray[i];
     value.classList.add("dropdownValue");
     value.onclick = () => {
-      updateButtonText(dropdown, value.innerHTML);
+      onClick(value.innerHTML);
     };
     dropdownContent.appendChild(value);
   }
@@ -167,7 +163,9 @@ function drag(button) {
     pos4 = e.clientY;
     button.style.top = button.offsetTop - pos2 + "px";
     button.style.left = button.offsetLeft - pos1 + "px";
-    selectedDropdown.classList.remove("selected");
+    if (selectedDropdown !== null) {
+      selectedDropdown.classList.remove("selected");
+    }
   }
 
   function closeDragElement() {
@@ -178,3 +176,7 @@ function drag(button) {
     calculateDimensions();
   }
 }
+
+// Populates dropdown with values
+const dropdownContent = document.getElementsByClassName("dropdownContent");
+populateDropdown(dropdownContent[0], dropdownValues, updateButtonText);
