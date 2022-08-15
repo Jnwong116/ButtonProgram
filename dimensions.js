@@ -58,17 +58,31 @@ const dropdownValues = [
   "Penthouse 5",
 ];
 
-const relayValues = [];
+const relayValues = [
+  1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22,
+  23, 24, 25, 26,
+];
 
-let selectedDropdown = null;
+const buttonRelay = {};
+
+let selectedButton = null;
 
 function updateButtonText(text) {
-  selectedDropdown.innerHTML = text;
+  selectedButton.innerHTML = text;
 }
 
 function updateRelayText(text) {
   const relay = document.getElementById("relay");
   relay.innerHTML = text;
+  buttonRelay[text] = selectedButton;
+}
+
+function getButtonRelay() {
+  for (const key in buttonRelay) {
+    if (buttonRelay[key] === selectedButton) {
+      updateRelayText(key);
+    }
+  }
 }
 
 function addButton() {
@@ -80,7 +94,13 @@ function addButton() {
   content.appendChild(button);
 
   // Adds number to relay values
-  relayValues.push(relayValues.length + 1);
+  const dropdownContent = document.getElementsByClassName("dropdownContent");
+  // relayValues.push(relayValues.length + 1);
+  // populateDropdown(dropdownContent[1], relayValues, updateRelayText);
+
+  // Resets relay value text
+  const relay = document.getElementById("relay");
+  relay.innerHTML = "Relay Number";
 
   drag(button);
 }
@@ -104,7 +124,7 @@ function addValue() {
 
   dropdownValues.push(newVal);
 
-  populateDropdown(dropdownContent[i], dropdownValues, updateButtonText);
+  populateDropdown(dropdownContent[0], dropdownValues, updateButtonText);
 }
 
 function populateDropdown(dropdownContent, dropdownArray, onClick) {
@@ -131,9 +151,9 @@ function calculateDimensions() {
   const top = document.getElementById("top");
   const width = document.getElementById("width");
   const height = document.getElementById("height");
-  const dimensions = selectedDropdown.getBoundingClientRect();
-  left.value = selectedDropdown.offsetLeft;
-  top.value = selectedDropdown.offsetTop;
+  const dimensions = selectedButton.getBoundingClientRect();
+  left.value = selectedButton.offsetLeft;
+  top.value = selectedButton.offsetTop;
   width.value = dimensions.width;
   height.value = dimensions.height;
 }
@@ -163,16 +183,17 @@ function drag(button) {
     pos4 = e.clientY;
     button.style.top = button.offsetTop - pos2 + "px";
     button.style.left = button.offsetLeft - pos1 + "px";
-    if (selectedDropdown !== null) {
-      selectedDropdown.classList.remove("selected");
+    if (selectedButton !== null) {
+      selectedButton.classList.remove("selected");
     }
   }
 
   function closeDragElement() {
     document.onmouseup = null;
     document.onmousemove = null;
-    selectedDropdown = button;
-    selectedDropdown.classList.add("selected");
+    selectedButton = button;
+    selectedButton.classList.add("selected");
+    getButtonRelay();
     calculateDimensions();
   }
 }
@@ -180,3 +201,4 @@ function drag(button) {
 // Populates dropdown with values
 const dropdownContent = document.getElementsByClassName("dropdownContent");
 populateDropdown(dropdownContent[0], dropdownValues, updateButtonText);
+populateDropdown(dropdownContent[1], relayValues, updateRelayText);
