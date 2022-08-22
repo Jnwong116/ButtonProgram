@@ -145,6 +145,8 @@ input {
   width: 30px;
   position: absolute;
   white-space: nowrap;
+  justify-content: center;
+  display: flex;
 }
 
 .relayDisabled {
