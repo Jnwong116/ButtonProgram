@@ -126,15 +126,29 @@ function addButton() {
   button.innerHTML = "Placeholder";
 
   content.appendChild(button);
+  if (selectedButton !== null) {
+    selectedButton.classList.remove("selected");
+  }
+  selectedButton = button;
+  selectedButton.classList.add("selected");
 
-  // Adds number to relay values
-  const dropdownContent = document.getElementsByClassName("dropdownContent");
-  // relayValues.push(relayValues.length + 1);
-  // populateDropdown(dropdownContent[1], relayValues, updateRelayText);
+  // Assigns button a relay number
+  let relayNumber = null;
+  for (const key in buttonRelay) {
+    if (buttonRelay[key] === undefined) {
+      relayNumber = key;
+      updateRelayText(key);
+      relayNumber = undefined;
+      break;
+    }
+    relayNumber = key;
+  }
 
-  // Resets relay value text
-  const relay = document.getElementById("relay");
-  relay.innerHTML = "Relay Number";
+  if (relayNumber === null) {
+    updateRelayText("1");
+  } else if (relayNumber !== undefined) {
+    updateRelayText(parseInt(relayNumber) + 1);
+  }
 
   drag(button);
 }
