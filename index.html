@@ -12,20 +12,17 @@
         <ul class="menu">
           <h3 class="menuHeader">Menu</h3>
           <p>
-            <button onclick="addButton()">Add Square</button>
+            <button onclick="addButton()">Add Button</button>
           </p>
 
-          <input type="text" id="addValue" placeholder="New Value" />
-          <button class="addValue" onclick="addValue()">Add New Value</button>
-
           <div class="dropdownContainer">
-            <button class="dropdown">Button Text</button>
+            <button class="dropdown">Audio</button>
             <div class="dropdownContent"></div>
           </div>
 
           <div class="dropdownContainer">
             <button class="dropdown" id="relay">Relay Number</button>
-            <div class="dropdownContent"></div>
+            <div class="dropdownContent" id="relayContainer"></div>
           </div>
 
           <h3 class="menuHeader">Width</h3>
@@ -39,6 +36,10 @@
 
           <input type="text" id="left" placeholder="Left" />
           <input type="text" id="top" placeholder="Top" />
+
+          <hr />
+          <input type="text" id="addValue" placeholder="New Value" />
+          <button class="addValue" onclick="addValue()">Add New Value</button>
         </ul>
       </nav>
     </header>

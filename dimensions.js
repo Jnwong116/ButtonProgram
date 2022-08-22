@@ -71,18 +71,52 @@ function updateButtonText(text) {
   selectedButton.innerHTML = text;
 }
 
+function updateRelays() {
+  const relayContainer = document.getElementById("relayContainer");
+  relayContainer.childNodes.forEach((relay) => {
+    if (buttonRelay[relay.innerHTML] !== undefined) {
+      relay.disabled = true;
+      relay.classList.add("relayDisabled");
+    }
+
+    if (buttonRelay[relay.innerHTML] === undefined) {
+      relay.disabled = false;
+      relay.classList.remove("relayDisabled");
+    }
+  });
+}
+
 function updateRelayText(text) {
+  if (selectedButton === null) {
+    return;
+  }
   const relay = document.getElementById("relay");
+
   relay.innerHTML = text;
+
+  if (text === "Relay Number") {
+    return;
+  }
+
+  // Checks if button is already assigned to relay
+  for (const key in buttonRelay) {
+    if (buttonRelay[key] === selectedButton) {
+      buttonRelay[key] = undefined;
+    }
+  }
+
   buttonRelay[text] = selectedButton;
+  updateRelays();
 }
 
 function getButtonRelay() {
   for (const key in buttonRelay) {
     if (buttonRelay[key] === selectedButton) {
       updateRelayText(key);
+      return;
     }
   }
+  updateRelayText("Relay Number");
 }
 
 function addButton() {
@@ -130,7 +164,7 @@ function addValue() {
 function populateDropdown(dropdownContent, dropdownArray, onClick) {
   clearDropdowns(dropdownContent);
   for (let i = 0; i < dropdownArray.length; i++) {
-    const value = document.createElement("a");
+    const value = document.createElement("option");
     value.innerHTML = dropdownArray[i];
     value.classList.add("dropdownValue");
     value.onclick = () => {
@@ -172,6 +206,12 @@ function drag(button) {
     pos4 = e.clientY;
     document.onmouseup = closeDragElement;
     document.onmousemove = elementDrag;
+    if (selectedButton !== null) {
+      selectedButton.classList.remove("selected");
+    }
+    selectedButton = button;
+    selectedButton.classList.add("selected");
+    getButtonRelay();
   }
 
   function elementDrag(e) {
@@ -183,17 +223,11 @@ function drag(button) {
     pos4 = e.clientY;
     button.style.top = button.offsetTop - pos2 + "px";
     button.style.left = button.offsetLeft - pos1 + "px";
-    if (selectedButton !== null) {
-      selectedButton.classList.remove("selected");
-    }
   }
 
   function closeDragElement() {
     document.onmouseup = null;
     document.onmousemove = null;
-    selectedButton = button;
-    selectedButton.classList.add("selected");
-    getButtonRelay();
     calculateDimensions();
   }
 }
