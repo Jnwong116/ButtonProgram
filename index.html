@@ -10,10 +10,17 @@
     <header class="pageHeader">
       <nav>
         <ul class="menu">
-          <h3 class="menuHeader">Menu</h3>
-          <p>
+          <h3 class="menuHeader menuTitle">Menu</h3>
+          <p class="addButton">
             <button onclick="addButton()">Add Button</button>
+
+            <button class="deleteButton" onclick="deleteButton()">
+              Delete Button
+            </button>
           </p>
+
+          <h3 class="menuHeader">Button Audio</h3>
+          <h3 class="menuHeader">Relay Number</h3>
 
           <div class="dropdownContainer">
             <button class="dropdown">Audio</button>
@@ -25,21 +32,29 @@
             <div class="dropdownContent" id="relayContainer"></div>
           </div>
 
-          <h3 class="menuHeader">Width</h3>
-          <h3 class="menuHeader">Height</h3>
-
-          <input type="text" id="width" placeholder="Width" />
-          <input type="text" id="height" placeholder="Height" />
-
           <h3 class="menuHeader">Left</h3>
-          <h3 class="menuHeader">Top</h3>
+          <h3 class="menuHeader">Width</h3>
 
           <input type="text" id="left" placeholder="Left" />
-          <input type="text" id="top" placeholder="Top" />
+          <input type="text" id="width" placeholder="Width" />
 
-          <hr />
-          <input type="text" id="addValue" placeholder="New Value" />
-          <button class="addValue" onclick="addValue()">Add New Value</button>
+          <h3 class="menuHeader">Top</h3>
+          <h3 class="menuHeader">Height</h3>
+
+          <input type="text" id="top" placeholder="Top" />
+          <input type="text" id="height" placeholder="Height" />
+
+          <h3 class="menuHeader">Settings</h3>
+
+          <div>
+            <input
+              class="settingsInput"
+              type="text"
+              id="addValue"
+              placeholder="New Value"
+            />
+            <button class="addValue" onclick="addValue()">Add New Value</button>
+          </div>
         </ul>
       </nav>
     </header>

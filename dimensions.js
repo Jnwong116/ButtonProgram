@@ -153,6 +153,26 @@ function addButton() {
   drag(button);
 }
 
+function deleteButton() {
+  if (selectedButton === null) {
+    return;
+  }
+
+  updateRelayText("Relay Number");
+
+  for (const key in buttonRelay) {
+    if (buttonRelay[key] === selectedButton) {
+      buttonRelay[key] = undefined;
+    }
+  }
+
+  const content = document.getElementById("pageContent");
+  content.removeChild(selectedButton);
+  selectedButton = null;
+
+  updateRelays();
+}
+
 function addValue() {
   const dropdownContent = document.getElementsByClassName("dropdownContent");
 

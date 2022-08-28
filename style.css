@@ -73,6 +73,7 @@ body {
   flex-basis: 50%;
   margin-bottom: 0px;
   height: 25px;
+  margin-top: 20%;
 }
 
 .pageHeader nav {
@@ -85,6 +86,7 @@ body {
   display: flex;
   flex-wrap: wrap;
   padding-bottom: 10px;
+  align-content: flex-start;
 }
 
 .pageHeader .menu p {
@@ -98,6 +100,7 @@ body {
   font-size: inherit;
   cursor: pointer;
   border: none;
+  float: left;
 }
 
 .pageContent {
@@ -119,7 +122,8 @@ input {
   border: 1px solid #ccc;
   border-radius: 4px;
   height: 26px;
-  margin-left: 15px;
+  text-align: center;
+  margin-right: 15px;
 }
 
 .menuForm {
@@ -152,4 +156,24 @@ input {
 .relayDisabled {
   cursor: not-allowed;
   background-color: #dfe21b;
+}
+
+.menuTitle {
+  margin-top: 0% !important;
+}
+
+.addButton {
+  margin-top: 20%;
+}
+
+.deleteButton {
+  margin-left: 26%;
+}
+
+.addButton span {
+  width: 50%;
+}
+
+.settingsInput {
+  float: right;
 }
